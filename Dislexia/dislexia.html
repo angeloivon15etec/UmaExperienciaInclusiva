@@ -1,108 +1,323 @@
-<!-- dislexia.html - Simulação de Dislexia (Letras embaralhadas) -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulação Dislexia | Uma Experiência Inclusiva</title>
-    <link rel="stylesheet" href="dislexia.css">
+    <title>Lab de Dislexia | Simulação Cognitiva</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=JetBrains+Mono&display=swap' );
+
+        :root {
+            --primary: #6366f1;
+            --accent: #f43f5e;
+            --bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --neon-blue: #3b82f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.1) 0, transparent 50%), 
+                radial-gradient(at 100% 100%, rgba(244, 63, 94, 0.1) 0, transparent 50%);
+            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: left;
+            margin-bottom: 3rem;
+            border-left: 5px solid var(--accent);
+            padding-left: 1.5rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            font-family: 'JetBrains Mono', monospace;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .main-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Área do Texto Confuso */
+        .confused-text {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            min-height: 200px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(244, 63, 94, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animação das letras "dançantes" */
+        .wobble-char {
+            display: inline-block;
+            transition: transform 0.2s;
+            position: relative;
+        }
+
+        .wobble-char.active {
+            animation: letterDance 0.5s infinite alternate;
+        }
+
+        @keyframes letterDance {
+            0% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-3px) rotate(5deg); }
+            100% { transform: translateY(2px) rotate(-5deg); }
+        }
+
+        /* Área de Pergunta */
+        .question-area {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .question-area p {
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        input[type="text"] {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            margin-bottom: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(244, 63, 94, 0.2);
+        }
+
+        .btn-check {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+        }
+
+        .btn-check:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(244, 63, 94, 0.4);
+        }
+
+        /* Info Box */
+        .info-panel {
+            background: linear-gradient(135deg, rgba(244, 63, 94, 0.1), transparent);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(244, 63, 94, 0.2);
+        }
+
+        .info-panel h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-panel h3::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        .solution-tag {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--neon-blue);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-top: 1rem;
+            margin-right: 0.5rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 3rem;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 1rem; }
+            header h1 { font-size: 2rem; }
+            .main-card { padding: 1.5rem; }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>📖 SIMULAÇÃO DE DISLEXIA</h1>
-        <p style="color: #666;">Leia o texto abaixo e responda a pergunta:</p>
 
-        <div id="confusedText" class="confused-text"></div>
+<div class="container">
+    <header>
+        <h1>Análise Cognitiva: Dislexia</h1>
+        <p>// Simulador de decodificação textual e processamento visual</p>
+    </header>
+
+    <main class="main-card">
+        <p style="margin-bottom: 1rem; font-size: 0.9rem; color: #94a3b8;">[SISTEMA]: Tente ler o log de dados abaixo e extrair a mensagem principal.</p>
+        
+        <div id="confusedText" class="confused-text">
+            <!-- Texto será gerado via JS -->
+        </div>
 
         <div class="question-area">
-            <p><strong>Pergunta:</strong> Qual é a principal mensagem do texto?</p>
-            <input type="text" id="userAnswer" placeholder="Digite sua resposta aqui...">
-            <br>
-            <button class="btn" id="checkBtn">Verificar resposta</button>
+            <p>Pergunta de Verificação:</p>
+            <input type="text" id="userAnswer" placeholder="Qual é o tema central do texto?">
+            <button class="btn-check" id="checkBtn">Processar Resposta</button>
         </div>
+    </main>
 
-        <div class="info-box">
-            <h3>💡 Você percebeu a dificuldade?</h3>
-            <p>Pessoas com dislexia frequentemente veem as letras "dançarem", trocarem de lugar ou se confundirem visualmente. Isso torna a leitura lenta, cansativa e cheia de erros de compreensão.</p>
-            <p><strong>✅ Soluções inclusivas:</strong> Fontes como OpenDyslexic, espaçamento entre linhas aumentado, contraste adequado, evitar blocos densos de texto, uso de imagens e áudio como complemento.</p>
+    <div class="info-panel">
+        <h3>Análise do Fenômeno</h3>
+        <p>A dislexia não é uma deficiência intelectual, mas um transtorno na decodificação de símbolos. No Ensino Médio, o volume de leitura aumenta, tornando essencial o uso de estratégias inclusivas.</p>
+        
+        <div style="margin-top: 1.5rem;">
+            <span class="solution-tag">FONTE_OPENDYSLEXIC</span>
+            <span class="solution-tag">ESPAÇAMENTO_ADAPTADO</span>
+            <span class="solution-tag">SUPORTE_MULTIMÍDIA</span>
+            <span class="solution-tag">ALTO_CONTRASTE</span>
         </div>
-
-        <a href="../simulator.html" class="back-link">← Voltar para página inicial</a>
     </div>
 
-    <script>
-        // Texto original
-        const originalText = "A acessibilidade digital é um direito fundamental. Pessoas com dislexia enfrentam desafios na leitura de textos convencionais. Letras que parecem se mover ou trocar de lugar tornam a compreensão muito difícil. Por isso, é essencial usar fontes adequadas e oferecer alternativas como áudio e imagens.";
+   
+    <div style="text-align: center;">
+        <a href="../simulator.html" class="back-link">← Voltar para página inicial</a>
+    </div>
+</div>
+
+<script>
+    const originalText = "A acessibilidade digital é um direito fundamental. Pessoas com dislexia enfrentam desafios na leitura de textos convencionais. Letras que parecem se mover ou trocar de lugar tornam a compreensão muito difícil. Por isso, é essencial usar fontes adequadas e oferecer alternativas como áudio e imagens.";
+    
+    const textElement = document.getElementById('confusedText');
+    const checkBtn = document.getElementById('checkBtn');
+    const userAnswer = document.getElementById('userAnswer');
+
+    // Função para embaralhar o meio das palavras
+    function scrambleWord(word) {
+        if (word.length <= 3) return word;
         
-        // Função para embaralhar letras dentro de palavras (mantendo primeira e última letra)
-        function shuffleLetters(word) {
-            if (word.length <= 3) return word;
-            
-            // Preserva pontuação
-            const punctuation = word.match(/[.,!?;:]/g);
-            const cleanWord = word.replace(/[.,!?;:]/g, '');
-            
-            if (cleanWord.length <= 3) return word;
-            
-            const first = cleanWord[0];
-            const last = cleanWord[cleanWord.length - 1];
-            let middle = cleanWord.slice(1, -1).split('');
-            
-            // Embaralha o meio
-            for (let i = middle.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [middle[i], middle[j]] = [middle[j], middle[i]];
-            }
-            
-            let result = first + middle.join('') + last;
-            
-            // Recoloca pontuação
-            if (punctuation) {
-                result += punctuation[0];
-            }
-            
-            return result;
+        let chars = word.split('');
+        let first = chars[0];
+        let last = chars[chars.length - 1];
+        let middle = chars.slice(1, -1);
+        
+        // Embaralha o meio
+        for (let i = middle.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [middle[i], middle[j]] = [middle[j], middle[i]];
         }
         
-        function scrambleText(text) {
-            return text.split(' ').map(word => {
-                return shuffleLetters(word);
-            }).join(' ');
-        }
+        return first + middle.join('') + last;
+    }
+
+    // Renderiza o texto com animação de "dança"
+    function renderText() {
+        const words = originalText.split(' ');
+        const scrambledWords = words.map(w => scrambleWord(w));
         
-        // Atualiza o texto com letras embaralhadas a cada 0.8 segundos
-        const textElement = document.getElementById('confusedText');
-        
-        function updateScrambledText() {
-            textElement.innerHTML = scrambleText(originalText).split('').map(char => {
-                if (char.match(/[a-zA-Zà-ú]/i)) {
-                    return `<span class="wobble-text">${char}</span>`;
-                }
-                return char;
-            }).join('');
-        }
-        
-        // Troca o texto constantemente para simular instabilidade
-        updateScrambledText();
-        const interval = setInterval(() => {
-            updateScrambledText();
-        }, 800);
-        
-        document.getElementById('checkBtn').addEventListener('click', function() {
-            const userAnswer = document.getElementById('userAnswer').value.toLowerCase();
-            const expectedKeywords = ['acessibilidade', 'direito', 'dislexia', 'desafio', 'leitura'];
-            const hasKeyword = expectedKeywords.some(keyword => userAnswer.includes(keyword));
-            
-            clearInterval(interval);
-            
-            if (hasKeyword) {
-                alert('✅ Você conseguiu compreender! Imagine o esforço extra que isso exige diariamente para quem tem dislexia.');
-            } else {
-                alert('❌ A compreensão foi difícil, né? O texto falava sobre acessibilidade digital e os desafios da dislexia na leitura.');
-                textElement.innerHTML = originalText;
-                textElement.style.animation = 'none';
+        textElement.innerHTML = scrambledWords.join(' ').split('').map(char => {
+            if (char.match(/[a-zA-Zà-ú]/i)) {
+                // Chance de 30% da letra estar "dançando" no momento
+                const isDancing = Math.random() > 0.7 ? 'active' : '';
+                return `<span class="wobble-char ${isDancing}">${char}</span>`;
             }
-        });
-    </script>
+            return char;
+        }).join('');
+    }
+
+    // Atualiza o texto constantemente
+    renderText();
+    const scrambleInterval = setInterval(renderText, 1000);
+
+    // Verifica a resposta
+    checkBtn.addEventListener('click', () => {
+        const answer = userAnswer.value.toLowerCase();
+        const keywords = ['acessibilidade', 'direito', 'dislexia', 'desafio', 'leitura', 'digital'];
+        const found = keywords.some(k => answer.includes(k));
+
+        clearInterval(scrambleInterval);
+
+        if (found) {
+            textElement.innerHTML = `<span style="color: var(--neon-blue)">>> ACESSO_CONCEDIDO:</span> ${originalText}`;
+            alert("✅ Você decodificou a mensagem! Imagine o processamento extra necessário para realizar essa tarefa em cada página de um livro.");
+        } else {
+            textElement.innerHTML = `<span style="color: var(--accent)">>> ERRO_DE_PROCESSAMENTO:</span> ${originalText}`;
+            alert("❌ A decodificação falhou. Isso demonstra como a sobrecarga cognitiva pode impedir a compreensão do conteúdo.");
+        }
+        
+        textElement.style.border = "1px solid var(--neon-blue)";
+    });
+</script>
+
 </body>
 </html>
