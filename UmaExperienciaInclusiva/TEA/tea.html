@@ -1,0 +1,241 @@
+<!-- tea.html - Simulação de TEA (com espaçamento ampliado entre elementos) -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulação TEA | Uma Experiência Inclusiva</title>
+    <link rel="stylesheet" href="tea.css">
+</head>
+<body>
+
+<div class="chaotic-container" id="chaoticContainer">
+    
+    <!-- Título da página -->
+    <div class="chaotic-element" id="titleElement">
+        <div class="status-badge">📌 ELEMENTO ESTÁVEL (MAS TREME)</div>
+        <h1 style="text-align: center; font-size: 2rem;">🌀 SIMULAÇÃO TEA - AUTISMO 🌀</h1>
+        <p style="text-align: center; color: #666; margin-top: 10px;">Interface caótica, imprevisível e sobrecarregada</p>
+    </div>
+
+    <div class="element-separator">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
+    <div class="chaotic-element" id="disappearingElement">
+        <div class="status-badge">🔄 TESTE 1: Este elemento SUMIR e VOLTAR</div>
+        <button class="disappearing-btn" id="mysteryBtn">
+            ⚠️ CLIQUE AQUI - SE VOCÊ CONSEGUIR ⚠️
+        </button>
+        <p style="font-size: 0.85rem; color: #999; margin-top: 12px;">📌 Este botão desaparece e aparece aleatoriamente a cada 2-6 segundos</p>
+    </div>
+
+    <div class="element-separator">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
+
+    <div class="chaotic-element">
+        <div class="status-badge">📍 TESTE 2: Este elemento se MOVE sozinho</div>
+        <div id="movingBox" class="moving-box">
+            🎯 EU ME MEXO! 🎯<br>
+            Tente me clicar!
+        </div>
+        <p style="font-size: 0.85rem; color: #999; margin-top: 12px;">📌 Esta caixa muda de posição e cor aleatoriamente a cada 1-3 segundos</p>
+    </div>
+
+    <div class="element-separator">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
+
+    <div class="chaotic-element">
+        <div class="status-badge">🎮 TESTE 3: Botão fugitivo</div>
+        <button id="fugitiveBtn" class="moving-button">
+            🏃‍♂️ ME PEGUE SE FOR CAPAZ 🏃‍♂️
+        </button>
+        <p style="font-size: 0.85rem; color: #999; margin-top: 12px;">📌 Este botão FUGE do seu mouse quando você tenta clicar!</p>
+    </div>
+
+    <div class="element-separator">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
+    <!-- ELEMENTO 4: Cor que muda constantemente -->
+    <div class="chaotic-element">
+        <div class="status-badge">🎨 TESTE 4: Cor mudando constantemente</div>
+        <div class="color-changing" id="colorChangingBox">
+            🌈 A MINHA COR MUDA A CADA 0.8 SEGUNDOS 🌈
+        </div>
+        <p style="font-size: 0.85rem; color: #999; margin-top: 12px;">📌 Este elemento muda de cor rapidamente, causando sobrecarga visual</p>
+    </div>
+
+    <div class="element-separator">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
+    <div class="chaotic-element">
+        <div class="status-badge">💨 TESTE 5: Elemento que PISCA</div>
+        <div class="blinking-element" id="blinkingBox">
+            🔥 EU PISCO! APARECENDO E SUMINDO RAPIDAMENTE 🔥
+        </div>
+        <p style="font-size: 0.85rem; color: #999; margin-top: 12px;">📌 Este elemento fica piscando (aparecendo e sumindo) a cada 0.2-0.7 segundos</p>
+    </div>
+
+    <div class="element-separator">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
+
+    <div class="element-separator">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
+    <div class="task-area">
+        <h3>✅ TAREFA PRINCIPAL:</h3>
+        <p>Digite seu nome no campo abaixo e clique em "Enviar"</p>
+        <input type="text" id="userName" placeholder="Seu nome" autocomplete="off">
+        <br>
+        <button class="btn-action" id="submitTask">Enviar</button>
+        <div id="taskResult" style="margin-top: 15px; font-size: 1rem; font-weight: bold;"></div>
+    </div>
+
+    <div class="info-box">
+        <h3>🧩 Você sentiu a sobrecarga?</h3>
+        <p>Pessoas com TEA (Transtorno do Espectro Autista) podem ter hipersensibilidade sensorial. Interfaces com as características abaixo são extremamente desafiadoras:</p>
+        <ul>
+            <li>🔸 Elementos que somem e aparecem sem aviso</li>
+            <li>🔸 Cores que mudam constantemente</li>
+            <li>🔸 Botões que se movem ou fogem do mouse</li>
+            <li>🔸 Layout imprevisível e caótico</li>
+            <li>🔸 Elementos que piscam ou tremem</li>
+        </ul>
+        <p style="margin-top: 1rem;"><strong>✅ Soluções inclusivas:</strong> interfaces previsíveis, estrutura clara, evitar mudanças bruscas, ícones consistentes, modo de baixa estimulação, permitir que o usuário controle animações.</p>
+    </div>
+
+    <div style="text-align: center;">
+        <a href="../simulator.html" class="back-link">← Voltar para página inicial</a>
+    </div>
+</div>
+
+<script>
+    const disappearingElement = document.getElementById('disappearingElement');
+    
+    function toggleVisibility() {
+        if (Math.random() > 0.5) {
+            disappearingElement.style.display = 'none';
+        } else {
+            disappearingElement.style.display = 'block';
+        }
+        const nextChange = Math.random() * 5000 + 2500;
+        setTimeout(toggleVisibility, nextChange);
+    }
+    toggleVisibility();
+
+    const movingBox = document.getElementById('movingBox');
+    
+    function moveRandomly() {
+        const maxX = 350;
+        const maxY = 120;
+        const newX = Math.random() * maxX - 50;
+        const newY = Math.random() * maxY - 40;
+        movingBox.style.transform = `translate(${newX}px, ${newY}px)`;
+        movingBox.style.transition = 'transform 0.3s ease';
+        
+        const colors = ['#ff6b6b', '#4ecdc4', '#ffe66d', '#ff9f1c', '#bf8f00', '#e056fd'];
+        movingBox.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        
+        setTimeout(moveRandomly, Math.random() * 2500 + 1200);
+    }
+    moveRandomly();
+    
+    movingBox.addEventListener('click', function() {
+        alert('🎯 Você conseguiu me clicar! Imagine como seria frustrante se todos os botões fugissem do seu mouse.');
+    });
+
+
+    const fugitiveBtn = document.getElementById('fugitiveBtn');
+    
+    fugitiveBtn.addEventListener('mouseenter', function() {
+        const container = this.parentElement;
+        const maxX = container.clientWidth - this.clientWidth - 30;
+        const maxY = 100;
+        
+        const newX = Math.random() * maxX;
+        const newY = Math.random() * maxY;
+        
+        this.style.position = 'relative';
+        this.style.left = `${newX}px`;
+        this.style.top = `${newY}px`;
+        this.style.transition = 'all 0.1s ease';
+    });
+    
+    fugitiveBtn.addEventListener('click', function() {
+        alert('🏆 Você conseguiu! Mas em um site real, botões que fogem impossibilitam a navegação.');
+    });
+
+    const colorBox = document.getElementById('colorChangingBox');
+    const colorList = ['#ff6b6b', '#4ecdc4', '#ffe66d', '#ff9f1c', '#bf8f00', '#e056fd', '#ff5252', '#6c5ce7'];
+    
+    function changeColor() {
+        const randomColor = colorList[Math.floor(Math.random() * colorList.length)];
+        colorBox.style.backgroundColor = randomColor;
+        setTimeout(changeColor, 800);
+    }
+    changeColor();
+
+    const blinkingBox = document.getElementById('blinkingBox');
+    
+    function blink() {
+        if (blinkingBox.style.opacity === '0' || blinkingBox.style.opacity === '') {
+            blinkingBox.style.opacity = '1';
+        } else {
+            blinkingBox.style.opacity = '0';
+        }
+        setTimeout(blink, Math.random() * 600 + 250);
+    }
+    blink();
+
+    setInterval(() => {
+        const titleElement = document.getElementById('titleElement');
+        if (Math.random() > 0.7) {
+            titleElement.classList.add('shake-animation');
+            setTimeout(() => titleElement.classList.remove('shake-animation'), 600);
+        }
+    }, 3500);
+
+    document.getElementById('submitTask').addEventListener('click', function() {
+        const userName = document.getElementById('userName').value;
+        const resultDiv = document.getElementById('taskResult');
+        
+        if (userName.trim() === '') {
+            resultDiv.innerHTML = '❌ Você não conseguiu digitar seu nome? Com tantas distrações, é compreensível!';
+            resultDiv.style.color = '#e74c3c';
+        } else {
+            resultDiv.innerHTML = `✅ Olá, ${userName}! Mesmo com todo o caos, você conseguiu completar a tarefa. Pessoas com TEA enfrentam esse tipo de sobrecarga sensorial diariamente.`;
+            resultDiv.style.color = '#27ae60';
+        }
+    });
+
+    function randomBeep() {
+        const beepDiv = document.createElement('div');
+        beepDiv.style.position = 'fixed';
+        beepDiv.style.bottom = '30px';
+        beepDiv.style.right = '30px';
+        beepDiv.style.backgroundColor = '#e84118';
+        beepDiv.style.color = 'white';
+        beepDiv.style.padding = '10px 20px';
+        beepDiv.style.borderRadius = '25px';
+        beepDiv.style.zIndex = '1000';
+        beepDiv.style.fontSize = '0.9rem';
+        beepDiv.style.fontWeight = 'bold';
+        beepDiv.style.boxShadow = '0 4px 12px rgba(0,0,0,0.3)';
+        beepDiv.innerHTML = '🔊 BEEP! ALERTA SONORO! 🔊';
+        document.body.appendChild(beepDiv);
+        
+        setTimeout(() => beepDiv.remove(), 2000);
+    }
+    
+    setInterval(() => {
+        if (Math.random() > 0.65) {
+            randomBeep();
+        }
+    }, 8000);
+
+    const mysteryBtn = document.getElementById('mysteryBtn');
+    if (mysteryBtn) {
+        mysteryBtn.addEventListener('click', function() {
+            alert('🔔 PARABÉNS! Você clicou em um botão que mal aparece. Imagine a dificuldade de navegar assim!');
+        });
+    }
+
+    console.log('Simulação TEA ativada - ambiente caótico e imprevisível');
+</script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador | Experiência Inclusiva</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap' );
+
+        :root {
+            --neon-cyan: #00f3ff;
+            --neon-purple: #bc00ff;
+            --bg-dark: #000b1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #e0faff;
+            font-family: 'Share Tech Mono', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: linear-gradient(0deg, rgba(0, 11, 26, 1) 0%, rgba(0, 20, 40, 1) 100%);
+            animation: fadeInBody 1s ease-in;
+        }
+
+        @keyframes fadeInBody {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 0;
+            background: var(--neon-cyan);
+            color: var(--bg-dark);
+            padding: 10px;
+            z-index: 1000;
+            transition: top 0.3s;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .skip-link:focus { top: 0; }
+
+        header.hero {
+            padding: 4rem 2rem;
+            text-align: center;
+            border-bottom: 2px solid var(--neon-cyan);
+            background: rgba(0, 243, 255, 0.03);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.1);
+        }
+
+        header.hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            text-shadow: 0 0 15px var(--neon-cyan);
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--neon-cyan);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: rgba(0, 243, 255, 0.05);
+            border: 1px solid var(--neon-purple);
+            padding: 2rem;
+            position: relative;
+            transition: 0.3s;
+            clip-path: polygon(0 0, 90% 0, 100% 10%, 100% 100%, 10% 100%, 0 90%);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(188, 0, 255, 0.1);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 25px rgba(0, 243, 255, 0.3);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px var(--neon-cyan));
+        }
+
+        .card h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .card h3 {
+            font-size: 0.8rem;
+            color: var(--neon-purple);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(188, 0, 255, 0.2);
+            padding-bottom: 0.5rem;
+        }
+
+        .card p { font-size: 0.9rem; margin-bottom: 1.5rem; flex-grow: 1; }
+
+        .challenge {
+            background: rgba(0, 0, 0, 0.3);
+            border-left: 3px solid var(--neon-cyan);
+            padding: 0.8rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.8rem;
+        }
+
+        .btn-test {
+            display: block;
+            width: 100%;
+            background: transparent;
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            padding: 12px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: 0.3s;
+            letter-spacing: 1px;
+        }
+
+        .btn-test:hover {
+            background: var(--neon-cyan);
+            color: var(--bg-dark);
+            box-shadow: 0 0 15px var(--neon-cyan);
+        }
+
+        .legal-section {
+            margin-top: 4rem;
+            padding: 2rem;
+            border: 1px dashed var(--neon-purple);
+            background: rgba(188, 0, 255, 0.02);
+        }
+
+        .legal-section h3 { color: var(--neon-purple); margin-bottom: 1rem; font-family: 'Orbitron', sans-serif; }
+
+        footer {
+            padding: 3rem;
+            text-align: center;
+            border-top: 1px solid rgba(0, 243, 255, 0.1);
+            font-size: 0.8rem;
+            color: rgba(0, 243, 255, 0.5);
+        }
+
+        /* Overlay de Transição (Entrada) */
+        .transition-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--neon-cyan);
+            z-index: 9999;
+            animation: slideOut 1s forwards cubic-bezier(0.7, 0, 0.3, 1);
+            pointer-events: none;
+        }
+
+        @keyframes slideOut {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100%); }
+        }
+    </style>
+</head>
+<body>
+    <div class="transition-overlay"></div>
+    <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+
+    <header class="hero">
+        <h1>Uma Experiência Inclusiva</h1>
+        <p class="subtitle">Sensibilização sobre neurodivergências e acessibilidade digital</p>
+    </header>
+
+    <main id="main-content" class="container">
+        <div class="cards-grid">
+            <!-- Card TDAH -->
+            <div class="card">
+                <div class="card-icon">🌀</div>
+                <h2>TDAH</h2>
+                <h3>Transtorno do Déficit de Atenção</h3>
+                <p>Dificuldade de manter o foco em interfaces poluídas com múltiplos estímulos simultâneos.</p>
+                <div class="challenge"><strong>⚡ Desafio:</strong> Pop-ups e informações dispersas.</div>
+                <a href="TDAH/tdah.html" class="btn-test">🎮 Testar na prática</a>
+            </div>
+
+            <!-- Card Dislexia -->
+            <div class="card">
+                <div class="card-icon">📖</div>
+                <h2>Dislexia</h2>
+                <h3>Transtorno de Aprendizagem</h3>
+                <p>Dificuldade na decodificação de palavras e leitura fluente. Letras que "dançam" visualmente.</p>
+                <div class="challenge"><strong>🔤 Desafio:</strong> Fontes inadequadas e pouco contraste.</div>
+                <a href="Dislexia/dislexia.html" class="btn-test">🎮 Testar na prática</a>
+            </div>
+
+            <!-- Card TEA -->
+            <div class="card">
+                <div class="card-icon">🧩</div>
+                <h2>TEA</h2>
+                <h3>Espectro Autista</h3>
+                <p>Hipersensibilidade a estímulos e necessidade de previsibilidade em interfaces.</p>
+                <div class="challenge"><strong>🌪️ Desafio:</strong> Mudanças inesperadas e layout confuso.</div>
+                <a href="TEA/tea.html" class="btn-test">🎮 Testar na prática</a>
+            </div>
+
+            <!-- Card Daltonismo -->
+            <div class="card">
+                <div class="card-icon">🎨</div>
+                <h2>Daltonismo</h2>
+                <h3>Discromatopsia</h3>
+                <p>Dificuldade em distinguir cores específicas, como vermelho e verde.</p>
+                <div class="challenge"><strong>🌈 Desafio:</strong> Dependência exclusiva de cores para avisos.</div>
+                <a href="Daltonismo/daltonismo.html" class="btn-test">🎮 Testar na prática</a>
+            </div>
+
+             <!-- Card oq é -->
+            <div class="card">
+                <div class="card-icon">❓</div>
+                <h2>Oque é?</h2>
+                <h3>doencas cognitivas</h3>
+                <div class="challenge"><strong>entender sobre o assunto</strong></div>
+                <a href="explicação.html" class="btn-test">🎮saiba mais</a>
+            </div>
+        </div>
+
+        <div class="legal-section">
+            <h3>📜 Sobre o projeto</h3>
+            <p>Desenvolvido pelos estudantes da ETEC Maria Cristina Medeiros - Informática para Internet 3ºF.</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>ETEC Maria Cristina Medeiros | 2026</p>
+        <button onclick="window.location.href='index.html'" style="background:none; border:1px solid var(--neon-cyan); color:var(--neon-cyan); padding:5px 10px; cursor:pointer; margin-top:10px; font-family:'Orbitron', sans-serif; font-size: 0.7rem;">VOLTAR AO INÍCIO</button>
+    </footer>
+</body>
+</html>

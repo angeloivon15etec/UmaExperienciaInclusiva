@@ -1,0 +1,80 @@
+  body {
+            font-family: 'Comic Sans MS', 'Arial', cursive;
+            background: #fef8e7;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        /* Efeito de letras embaralhadas - usando JavaScript */
+        .confused-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            background: #fff9e6;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            border-left: 5px solid #e67e22;
+            text-align: left;
+        }
+
+        .question-area {
+            margin: 2rem 0;
+        }
+
+        .question-area input {
+            padding: 12px;
+            width: 80%;
+            font-size: 1rem;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .btn {
+            background: #e67e22;
+            color: white;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 40px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .info-box {
+            background: #e8f4f8;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+            text-align: left;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            color: #e67e22;
+            text-decoration: none;
+        }
+
+        @keyframes wobble {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-2px) rotate(-1deg); }
+            75% { transform: translateX(2px) rotate(1deg); }
+        }
+
+        .wobble-text {
+            display: inline-block;
+            animation: wobble 0.15s infinite;
+        }
