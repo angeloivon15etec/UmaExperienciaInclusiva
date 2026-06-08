@@ -1,0 +1,149 @@
+<!-- tdah.html - Simulação de TDAH (Interface poluída) -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="tdah.css">
+    <title>Simulação TDAH | Uma Experiência Inclusiva</title>
+
+</head>
+<body>
+
+    <!-- Elementos distratores -->
+    <div class="marquee">
+        <span>🔥 PROMOÇÃO IMPERDÍVEL 🔥 CLIQUE AQUI E GANHE 50% OFF 🔥 ÚLTIMAS HORAS 🔥</span>
+    </div>
+
+    <div class="floating-ad" style="top: 20%; right: 5%;">✨ VEM PRO SORTEIO! ✨</div>
+    <div class="floating-ad" style="bottom: 30%; left: 2%;">🎁 CLIQUE E GANHE 🎁</div>
+    <div class="floating-ad" style="top: 60%; right: 3%;">📢 NOTIFICAÇÕES ATIVADAS 📢</div>
+
+    <div class="distractor" onclick="alert('🔔 Você ganhou um prêmio! 🔔')">🎯 OFERTA</div>
+    <button class="alert-sound-btn" onclick="playBeep()">🔊 SOM ALERTA</button>
+
+    <div class="main-content">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2 style="color: #333;">🧠 SIMULAÇÃO TDAH</h2>
+            <div class="blink-text">⚠️ URGENTE ⚠️</div>
+        </div>
+        <p style="color: #666; margin: 10px 0;">Tente completar a tarefa abaixo com todas essas distrações...</p>
+        
+        <div class="task-box">
+            <h3>✅ Tarefa:</h3>
+            <p><strong>Calcule o resultado e digite abaixo:</strong></p>
+            <p style="font-size: 1.5rem; text-align: center;">15 + 27 = ?</p>
+            <input type="text" id="answerInput" placeholder="Digite sua resposta">
+            <button class="btn-action" id="submitBtn">ENVIAR RESPOSTA</button>
+        </div>
+
+        <div class="timer" id="timer">⏱️ 30s</div>
+        
+        <div style="background: #ffeecc; padding: 15px; border-radius: 8px; margin: 15px 0;">
+            <p><strong>💡 Você sentiu dificuldade para focar?</strong> As pessoas com TDAH enfrentam esse tipo de sobrecarga sensorial constantemente. Animações, pop-ups, sons e múltiplos estímulos tornam tarefas simples muito desafiadoras.</p>
+            <p style="margin-top: 10px;"><strong>✅ Soluções inclusivas:</strong> interfaces limpas, espaços em branco, modo foco, redução de notificações, progresso claro das tarefas.</p>
+        </div>
+
+        <a href="../simulator.html" class="back-link">← Voltar para página inicial</a>
+    </div>
+
+    <!-- Contador regressivo e pop-ups -->
+    <script>
+        let timeLeft = 30;
+        let timerInterval;
+        let popupInterval;
+        
+        function startTimer() {
+            const timerEl = document.getElementById('timer');
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                timerEl.textContent = `⏱️ ${timeLeft}s`;
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    clearInterval(popupInterval);
+                    alert('⏰ TEMPO ESGOTADO! A distração te venceu dessa vez.');
+                }
+            }, 1000);
+        }
+        
+        function showRandomPopup() {
+            const messages = [
+                "🔔 Nova mensagem! Clique para ver",
+                "📱 Atualize seu navegador AGORA",
+                "🎮 Você ganhou 1000 pontos!",
+                "💬 Alguém comentou no seu post",
+                "📧 Você tem 5 e-mails não lidos",
+                "🔴 SEU COMPUTADOR ESTÁ LENTO",
+                "🎉 PARABÉNS! Você é o visitante 1000"
+            ];
+            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+            const popupDiv = document.createElement('div');
+            popupDiv.className = 'popup-overlay';
+            popupDiv.innerHTML = `
+                <div class="popup-box">
+                    <p style="font-size: 1.2rem;">📢</p>
+                    <p>${randomMsg}</p>
+                    <button class="close-popup" onclick="this.closest('.popup-overlay').remove()">Fechar</button>
+                </div>
+            `;
+            document.body.appendChild(popupDiv);
+            
+            // Auto-fechar após 3 segundos
+            setTimeout(() => {
+                if(popupDiv.parentNode) popupDiv.remove();
+            }, 3000);
+        }
+        
+        function playBeep() {
+            const audio = new Audio('data:audio/wav;base64,U3RlYWx0aCBzb3VuZA==');
+            audio.play().catch(e => console.log('Áudio não suportado'));
+            alert('🔊 BEEP! Mais uma distração sonora!');
+        }
+        
+        // Pop-ups aleatórios a cada 3-5 segundos
+        popupInterval = setInterval(() => {
+            showRandomPopup();
+        }, 4000);
+        
+        // Sons simulados a cada 7 segundos
+        setInterval(() => {
+            const beepDiv = document.createElement('div');
+            beepDiv.style.position = 'fixed';
+            beepDiv.style.bottom = '80px';
+            beepDiv.style.left = '20px';
+            beepDiv.style.background = 'orange';
+            beepDiv.style.color = 'white';
+            beepDiv.style.padding = '8px';
+            beepDiv.style.borderRadius = '20px';
+            beepDiv.style.zIndex = '100';
+            beepDiv.innerHTML = '🔊 PIIIIU!';
+            document.body.appendChild(beepDiv);
+            setTimeout(() => beepDiv.remove(), 1000);
+        }, 7000);
+        
+        startTimer();
+        
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            const answer = document.getElementById('answerInput').value;
+            if(answer == '42') {
+                clearInterval(timerInterval);
+                clearInterval(popupInterval);
+                alert('✅ Resposta correta! Mesmo com todas as distrações você conseguiu. Imagine como é desafiador para quem tem TDAH.');
+            } else {
+                alert('❌ Resposta errada! A resposta correta é 42. A sobrecarga de informações pode atrapalhar a concentração.');
+            }
+        });
+        
+        // Elemento que se move aleatoriamente
+        setInterval(() => {
+            const ads = document.querySelectorAll('.floating-ad');
+            ads.forEach(ad => {
+                const newX = Math.random() * 80;
+                const newY = Math.random() * 80;
+                ad.style.left = `${newX}%`;
+                ad.style.top = `${newY}%`;
+            });
+        }, 3000);
+    </script>
+</body>
+</html>
