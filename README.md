@@ -1,2 +1,2 @@
-# https://angeloivon15etec.github.io./UmaExperienciaInclusiva/index.html
+# https://angeloivon15etec.github.io/UmaExperienciaInclusiva/index.html
 # UmaExperienciaInclusiva
