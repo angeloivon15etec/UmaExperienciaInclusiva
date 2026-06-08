@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Link | Início</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap' );
+
+        :root {
+            --neon-cyan: #00f3ff;
+            --bg-dark: #000b1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Fundo de Grade Animada */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 243, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: perspective(500px) rotateX(60deg) translateY(-200px);
+            z-index: -1;
+            animation: moveGrid 20s linear infinite;
+        }
+
+        @keyframes moveGrid {
+            from { background-position: 0 0; }
+            to { background-position: 0 1000px; }
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            padding: 2rem;
+            border: 2px solid var(--neon-cyan);
+            background: rgba(0, 243, 255, 0.05);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 50px rgba(0, 243, 255, 0.2);
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            letter-spacing: 8px;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px var(--neon-cyan);
+        }
+
+        p {
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--neon-cyan);
+            margin-bottom: 3rem;
+            letter-spacing: 2px;
+        }
+
+        .play-btn {
+            background: transparent;
+            border: 2px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            padding: 1.5rem 4rem;
+            font-size: 1.5rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .play-btn:hover {
+            background: var(--neon-cyan);
+            color: var(--bg-dark);
+            box-shadow: 0 0 40px var(--neon-cyan);
+            transform: scale(1.1);
+        }
+
+        /* Overlay de Transição */
+        .transition-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--neon-cyan);
+            transform: translateY(100%);
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .transition-active {
+            animation: slideUp 1s forwards cubic-bezier(0.7, 0, 0.3, 1);
+        }
+
+        @keyframes slideUp {
+            0% { transform: translateY(100%); }
+            50% { transform: translateY(0); }
+            100% { transform: translateY(-100%); }
+        }
+
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 4px, 3px 100%;
+            z-index: 100;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div class="scanlines"></div>
+    <div class="transition-overlay" id="overlay"></div>
+
+    <div class="container">
+        <h1>NEURAL LINK</h1>
+        <p>SISTEMA DE ACESSIBILIDADE DIGITAL v3.0</p>
+        <a href="javascript:void(0)" class="play-btn" onclick="startTransition()">JOGAR</a>
+    </div>
+
+    <script>
+        function startTransition() {
+            const overlay = document.getElementById('overlay');
+            overlay.classList.add('transition-active');
+            
+            setTimeout(() => {
+                // Certifique-se de que o outro arquivo se chama simulador.html
+                window.location.href = 'simulator.html';
+            }, 500);
+        }
+    </script>
+</body>
+</html>
